@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Nikhil Saroj | Applied AI & Automation Engineer</title>
+  <!-- Tailwind CSS v3 + Font Awesome + Google Fonts -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <style>
+    * { font-family: 'Inter', sans-serif; }
+    body {
+      background: radial-gradient(circle at 10% 20%, rgba(10, 12, 27, 1) 0%, #03050b 100%);
+      scroll-behavior: smooth;
+    }
+    .glass-card {
+      background: rgba(18, 22, 40, 0.65);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(72, 187, 255, 0.2);
+      transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    }
+    .glass-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(0, 255, 255, 0.5);
+      box-shadow: 0 20px 35px -12px rgba(0, 150, 255, 0.25);
+      background: rgba(25, 30, 55, 0.8);
+    }
+    .btn-primary {
+      background: linear-gradient(95deg, #0b63e5, #2b9eff);
+      transition: all 0.2s ease;
+      box-shadow: 0 8px 20px -8px #0b63e5;
+    }
+    .btn-primary:hover {
+      transform: scale(1.03);
+      box-shadow: 0 12px 28px -6px #2b9eff;
+    }
+    .skill-badge {
+      background: rgba(0, 200, 255, 0.1);
+      border: 1px solid rgba(0, 200, 255, 0.3);
+      transition: 0.2s;
+      font-size: 0.7rem;
+      padding: 0.2rem 0.7rem;
+      border-radius: 999px;
+    }
+    .skill-badge:hover {
+      background: rgba(0, 200, 255, 0.25);
+      border-color: #00ccff;
+    }
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    @keyframes glowPulse {
+      0% { text-shadow: 0 0 0px rgba(0, 180, 255, 0);}
+      100% { text-shadow: 0 0 12px rgba(0, 180, 255, 0.6);}
+    }
+    .hero-name { animation: glowPulse 2s infinite alternate; }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #0a0c1a; }
+    ::-webkit-scrollbar-thumb { background: #1e80c0; border-radius: 12px; }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(12px);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-content {
+      background: #0C111C;
+      max-width: 700px;
+      width: 90%;
+      border-radius: 32px;
+      padding: 2rem;
+      border: 1px solid #2D3A52;
+      max-height: 85vh;
+      overflow-y: auto;
+    }
+    .close-modal {
+      float: right;
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: #94A3B8;
+      transition: 0.2s;
+    }
+    .close-modal:hover { color: white; }
+
+    /* Mobile menu styles */
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      background: rgba(10, 12, 27, 0.95);
+      backdrop-filter: blur(16px);
+      position: absolute;
+      top: 70px;
+      left: 0;
+      right: 0;
+      padding: 1.5rem;
+      gap: 1.2rem;
+      border-bottom: 1px solid rgba(72, 187, 255, 0.3);
+      z-index: 40;
+    }
+    .mobile-menu a {
+      color: #e2e8f0;
+      font-weight: 500;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    @media (max-width: 768px) {
+      .desktop-nav { display: none; }
+      .mobile-menu-btn { display: block; }
+    }
+    @media (min-width: 769px) {
+      .mobile-menu-btn { display: none; }
+      .desktop-nav { display: flex; }
+      .mobile-menu { display: none !important; }
+    }
+  </style>
+</head>
+<body class="text-gray-200">
+
+  <!-- Sticky Navigation with mobile toggle -->
+  <nav class="fixed top-0 w-full z-50 bg-black/40 backdrop-blur-xl border-b border-white/10 shadow-lg">
+    <div class="max-w-7xl mx-auto px-6 py-3 flex flex-wrap justify-between items-center">
+      <!-- Logo / Brand -->
+      <div class="text-xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Nikhil<span class="text-white">.ai</span></div>
+      
+      <!-- Desktop Navigation -->
+      <div class="desktop-nav gap-5 text-sm font-medium text-gray-300 items-center">
+        <a href="#home" class="hover:text-cyan-300 transition">Home</a>
+        <a href="#experience" class="hover:text-cyan-300 transition">Experience</a>
+        <a href="#skills" class="hover:text-cyan-300 transition">Skills</a>
+        <a href="#projects" class="hover:text-cyan-300 transition">Projects</a>
+        <a href="#contact" class="hover:text-cyan-300 transition">Contact</a>
+        <a href="#" id="resumeBtnNav" class="px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 text-sm transition"><i class="fas fa-download"></i> Resume</a>
+        <a href="https://github.com/Nikhildsaroj" target="_blank" class="hover:text-cyan-300"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/nikhil-saroj-a15bb0281" target="_blank" class="hover:text-cyan-300"><i class="fab fa-linkedin"></i></a>
+      </div>
+      
+      <!-- Mobile Menu Button -->
+      <div class="mobile-menu-btn cursor-pointer text-2xl" id="mobileMenuToggle">
+        <i class="fas fa-bars"></i>
+      </div>
+    </div>
+    
+    <!-- Mobile Menu Dropdown -->
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#home" class="hover:text-cyan-300">Home</a>
+      <a href="#experience" class="hover:text-cyan-300">Experience</a>
+      <a href="#skills" class="hover:text-cyan-300">Skills</a>
+      <a href="#projects" class="hover:text-cyan-300">Projects</a>
+      <a href="#contact" class="hover:text-cyan-300">Contact</a>
+      <a href="#" id="resumeBtnMobile" class="py-2"><i class="fas fa-download"></i> Resume</a>
+      <div class="flex gap-4 pt-2">
+        <a href="https://github.com/Nikhildsaroj" target="_blank"><i class="fab fa-github text-xl"></i></a>
+        <a href="https://www.linkedin.com/in/nikhil-saroj-a15bb0281" target="_blank"><i class="fab fa-linkedin text-xl"></i></a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="pt-20 overflow-x-hidden">
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center px-6 py-24">
+      <div class="max-w-6xl mx-auto w-full">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          <div class="fade-up">
+            <div class="inline-block px-4 py-1 rounded-full bg-blue-500/20 text-blue-300 text-xs font-semibold tracking-wide mb-4 border border-blue-500/30">✨ Applied AI & Automation Engineer</div>
+            <h1 class="text-5xl md:text-7xl font-extrabold leading-tight"><span class="hero-name bg-gradient-to-r from-white via-cyan-200 to-blue-400 bg-clip-text text-transparent">Nikhil Saroj</span></h1>
+            <p class="text-xl text-gray-300 mt-4 max-w-lg">Building practical AI systems that combine <span class="text-cyan-300 font-semibold">machine learning, automation, and backend engineering</span> to solve real business workflows.</p>
+            <div class="flex flex-wrap gap-4 mt-8">
+              <a href="#projects" class="btn-primary px-6 py-3 rounded-xl font-semibold flex items-center gap-2"><i class="fas fa-arrow-down"></i> View Work</a>
+              <a href="https://github.com/Nikhildsaroj" target="_blank" class="px-6 py-3 rounded-xl border border-gray-500 hover:border-cyan-400 transition flex items-center gap-2"><i class="fab fa-github"></i> GitHub</a>
+              <a href="https://www.linkedin.com/in/nikhil-saroj-a15bb0281" target="_blank" class="px-6 py-3 rounded-xl border border-gray-500 hover:border-cyan-400 transition flex items-center gap-2"><i class="fab fa-linkedin"></i> LinkedIn</a>
+            </div>
+            <div class="flex flex-wrap gap-6 mt-8 text-sm text-gray-400">
+              <span><i class="fas fa-map-marker-alt text-cyan-400"></i> Airoli, Navi Mumbai</span>
+              <span><i class="fas fa-envelope text-cyan-400"></i> nikhilsaroj.ai@gmail.com</span>
+              <span><i class="fas fa-phone-alt text-cyan-400"></i> +91 9049813168</span>
+            </div>
+          </div>
+          <div class="relative flex justify-center fade-up">
+            <div class="w-64 h-64 md:w-80 md:h-80 rounded-full bg-gradient-to-tr from-cyan-500/20 to-blue-600/20 blur-3xl absolute -z-10"></div>
+            <div class="glass-card rounded-3xl p-6 w-full max-w-sm backdrop-blur-2xl border border-white/20">
+              <div class="text-center">
+                <i class="fas fa-brain text-5xl text-cyan-300 mb-2"></i>
+                <div class="text-3xl font-bold">0–1 Yr</div>
+                <div class="text-sm">Applied AI Engineer</div>
+                <hr class="my-4 border-white/20">
+                <div class="grid grid-cols-2 gap-3 text-sm">
+                  <div><span class="text-cyan-300 font-bold">12+</span><br>AI/automation projects</div>
+                  <div><span class="text-cyan-300 font-bold">5+</span><br>prod-grade systems</div>
+                  <div><span class="text-cyan-300 font-bold">95%+</span><br>validation accuracy</div>
+                  <div><span class="text-cyan-300 font-bold">100K+</span><br>leads processed</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About & education -->
+    <section class="px-6 py-16 max-w-6xl mx-auto">
+      <div class="glass-card rounded-3xl p-8 fade-up">
+        <div class="flex flex-wrap gap-8 items-start">
+          <div class="flex-1">
+            <h2 class="text-3xl font-bold flex items-center gap-2"><i class="fas fa-user-astronaut text-cyan-400"></i> About me</h2>
+            <p class="mt-4 text-gray-300 leading-relaxed">I'm an <strong class="text-cyan-300">Applied AI & ML Engineer</strong> focused on bridging machine learning with business workflows — OCR, NLP, computer vision, automation pipelines, and backend systems. Currently building production tools that reduce manual effort, improve data quality, and deliver real operational value.</p>
+            <p class="mt-3 text-gray-300">From end-to-end lead management platforms, email-to-Excel automation, sales forecasting with XGBoost, to OCR-based inventory counting — I design scalable solutions that move beyond notebooks. I target roles where AI meets engineering: Applied ML, AI Automation, or Backend + AI systems.</p>
+            <div class="mt-5 grid sm:grid-cols-2 gap-4">
+              <div><i class="fas fa-graduation-cap text-cyan-300"></i> <span class="font-semibold">B.Sc CS (Data Science)</span><br>Pillai College, CGPA 8.8/10</div>
+              <div><i class="fas fa-certificate text-cyan-300"></i> <span class="font-semibold">Certifications:</span> AI/ML, Cybersecurity, Cryptocurrency & AI</div>
+            </div>
+          </div>
+          <div class="flex-1">
+            <h3 class="text-xl font-semibold">Core Philosophy</h3>
+            <ul class="mt-3 space-y-2 text-gray-300">
+              <li><i class="fas fa-check-circle text-cyan-400 w-5"></i> AI is not just notebooks — it's integration</li>
+              <li><i class="fas fa-check-circle text-cyan-400 w-5"></i> Automation reduces human error & unlocks scale</li>
+              <li><i class="fas fa-check-circle text-cyan-400 w-5"></i> End-to-end ownership: scraping → model → dashboard → deployment</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section id="experience" class="px-6 py-12 max-w-6xl mx-auto">
+      <h2 class="text-4xl font-bold text-center mb-12 fade-up"><span class="border-b-4 border-cyan-400 pb-2">Experience</span></h2>
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="glass-card rounded-2xl p-6 fade-up">
+          <div class="flex items-start gap-4">
+            <i class="fas fa-building text-3xl text-cyan-300"></i>
+            <div><h3 class="text-xl font-bold">Software Developer – AI & Automation</h3><p class="text-cyan-300 text-sm">Bharat Wire Ropes Ltd. | May 2025 – Present</p>
+            <ul class="mt-3 space-y-2 text-sm list-disc pl-5 text-gray-300"><li>Built OCR-based extraction pipelines (PaddleOCR) converting PDFs/images → structured Excel datasets.</li><li>Developed email → processing → validation → reporting pipelines, reducing manual work by 70%.</li><li>Designed Flask/FastAPI internal dashboards + Zoho CRM webhooks for lead/contact sync.</li><li>Engineered ETL workflows & database optimization (MySQL indexing, query tuning).</li><li>Deployed internal tools using Cloudflare Tunnel & lightweight hosting, enabling remote access.</li></ul></div>
+          </div>
+        </div>
+        <div class="glass-card rounded-2xl p-6 fade-up">
+          <div class="flex items-start gap-4">
+            <i class="fas fa-chart-line text-3xl text-cyan-300"></i>
+            <div><h3 class="text-xl font-bold">Data Analytics & Visualization Intern</h3><p class="text-cyan-300 text-sm">Quantum Learnings (Remote) | Apr 2024 – Jun 2024</p>
+            <ul class="mt-3 space-y-2 text-sm list-disc pl-5 text-gray-300"><li>Developed collaborative filtering & KMeans recommendation systems, boosting accuracy by 25%.</li><li>Built semantic recommendation engine using embeddings + FAISS + Streamlit deployment.</li><li>Created AI Language Learning Chatbot (Gemini API, LangChain, speech I/O).</li><li>Performed data analysis & feature engineering using Pandas/Matplotlib.</li></ul></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Technical Capabilities -->
+    <section id="skills" class="px-6 py-12 max-w-6xl mx-auto">
+      <div class="text-center mb-12 fade-up"><h2 class="text-4xl font-bold">Technical Capability Map</h2><div class="h-1 w-20 bg-cyan-400 mx-auto mt-2 rounded-full"></div></div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div class="glass-card p-5 rounded-xl fade-up"><h3 class="font-bold text-lg"><i class="fab fa-python text-cyan-300 mr-2"></i>Programming</h3><div class="flex flex-wrap gap-2 mt-3"><span class="skill-badge">Python</span><span class="skill-badge">SQL</span><span class="skill-badge">Java/C#</span><span class="skill-badge">JavaScript</span></div></div>
+        <div class="glass-card p-5 rounded-xl fade-up"><h3 class="font-bold text-lg"><i class="fas fa-server text-cyan-300 mr-2"></i>Backend & Frameworks</h3><div class="flex flex-wrap gap-2 mt-3"><span class="skill-badge">Flask</span><span class="skill-badge">FastAPI</span><span class="skill-badge">Streamlit</span><span class="skill-badge">REST APIs</span></div></div>
+        <div class="glass-card p-5 rounded-xl fade-up"><h3 class="font-bold text-lg"><i class="fas fa-brain text-cyan-300 mr-2"></i>ML & AI</h3><div class="flex flex-wrap gap-2 mt-3"><span class="skill-badge">XGBoost</span><span class="skill-badge">Scikit-learn</span><span class="skill-badge">Forecasting</span><span class="skill-badge">Feature Eng.</span></div></div>
+        <div class="glass-card p-5 rounded-xl fade-up"><h3 class="font-bold text-lg"><i class="fas fa-comment-dots text-cyan-300 mr-2"></i>NLP / LLM</h3><div class="flex flex-wrap gap-2 mt-3"><span class="skill-badge">Transformers</span><span class="skill-badge">LangChain</span><span class="skill-badge">Gemini API</span><span class="skill-badge">Whisper</span></div></div>
+        <div class="glass-card p-5 rounded-xl fade-up"><h3 class="font-bold text-lg"><i class="fas fa-eye text-cyan-300 mr-2"></i>Computer Vision</h3><div class="flex flex-wrap gap-2 mt-3"><span class="skill-badge">OpenCV</span><span class="skill-badge">YOLO</span><span class="skill-badge">PaddleOCR</span><span class="skill-badge">DeepSORT</span></div></div>
+        <div class="glass-card p-5 rounded-xl fade-up"><h3 class="font-bold text-lg"><i class="fas fa-chart-line text-cyan-300 mr-2"></i>Data & Automation</h3><div class="flex flex-wrap gap-2 mt-3"><span class="skill-badge">ETL</span><span class="skill-badge">Pandas</span><span class="skill-badge">Playwright</span><span class="skill-badge">IMAP/Drive API</span></div></div>
+        <div class="glass-card p-5 rounded-xl fade-up"><h3 class="font-bold text-lg"><i class="fas fa-database text-cyan-300 mr-2"></i>Databases</h3><div class="flex flex-wrap gap-2 mt-3"><span class="skill-badge">MySQL</span><span class="skill-badge">SQLite</span><span class="skill-badge">Query Tuning</span></div></div>
+        <div class="glass-card p-5 rounded-xl fade-up"><h3 class="font-bold text-lg"><i class="fas fa-cloud-upload-alt text-cyan-300 mr-2"></i>Deployment/Cloud</h3><div class="flex flex-wrap gap-2 mt-3"><span class="skill-badge">Cloudflare Tunnel</span><span class="skill-badge">Streamlit Cloud</span><span class="skill-badge">Render/Railway</span></div></div>
+      </div>
+    </section>
+
+    <!-- Featured Projects -->
+    <section id="projects" class="px-6 py-16 max-w-7xl mx-auto">
+      <div class="text-center mb-12 fade-up"><h2 class="text-4xl font-bold">⚡ Flagship Engineering Projects</h2><p class="text-gray-400 mt-2">Production-grade AI & automation systems delivering real business value</p></div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-7" id="projectsContainer"></div>
+      <div class="mt-6 text-center text-gray-400 text-sm">⭐ 15+ production tools including email automation, PDF extraction, Tally transformer, price scraper, canteen CV, Netflix recommender & more.</div>
+    </section>
+
+    <!-- Strengths & Impact Areas -->
+    <section class="px-6 py-12 max-w-7xl mx-auto">
+      <div class="text-center mb-8 fade-up"><h2 class="text-3xl font-bold">Strengths & impact areas</h2></div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="glass-card p-5 rounded-2xl fade-up"><i class="fas fa-check-circle text-cyan-400 text-2xl"></i><h3 class="font-bold mt-2">Real-world automation</h3><p class="text-sm text-gray-300">Email → Drive → Excel pipelines, lead scraping, CRM webhooks</p></div>
+        <div class="glass-card p-5 rounded-2xl fade-up"><i class="fas fa-file-alt text-cyan-400 text-2xl"></i><h3 class="font-bold mt-2">Document Intelligence</h3><p class="text-sm text-gray-300">OCR + fuzzy matching + Google Sheets integration</p></div>
+        <div class="glass-card p-5 rounded-2xl fade-up"><i class="fas fa-chart-line text-cyan-400 text-2xl"></i><h3 class="font-bold mt-2">Forecasting & ML Ops</h3><p class="text-sm text-gray-300">XGBoost sales prediction, inventory optimization, 90%+ manual reduction</p></div>
+        <div class="glass-card p-5 rounded-2xl fade-up"><i class="fas fa-cloud-upload-alt text-cyan-400 text-2xl"></i><h3 class="font-bold mt-2">Deployment exposure</h3><p class="text-sm text-gray-300">Cloudflare Tunnel, Streamlit Cloud, Railway, Render</p></div>
+        <div class="glass-card p-5 rounded-2xl fade-up"><i class="fas fa-database text-cyan-400 text-2xl"></i><h3 class="font-bold mt-2">Backend + API design</h3><p class="text-sm text-gray-300">Flask MVC, REST, Zoho integration, data validation engines</p></div>
+        <div class="glass-card p-5 rounded-2xl fade-up"><i class="fas fa-robot text-cyan-400 text-2xl"></i><h3 class="font-bold mt-2">LLM integration</h3><p class="text-sm text-gray-300">LangChain, Gemini API, RAG-style memory, speech-enabled chatbot</p></div>
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section id="education" class="px-6 py-12 max-w-5xl mx-auto">
+      <div class="glass-card rounded-3xl p-8 fade-up">
+        <h2 class="text-3xl font-bold flex items-center gap-2"><i class="fas fa-graduation-cap text-cyan-400"></i> Education & credentials</h2>
+        <div class="mt-4"><span class="font-bold text-xl">B.Sc. Computer Science (Data Science specialization)</span><br>Pillai College of Arts, Commerce & Science (Autonomous), Navi Mumbai | July 2022 – March 2025</div>
+        <p class="mt-2"><span class="text-cyan-300">CGPA: 8.8 / 10</span> · Core: Data Structures, Operating Systems, DBMS, OOP, Python, Java, Networks, Software Engineering</p>
+        <div class="mt-3 flex flex-wrap gap-2"><strong>Certifications:</strong> <span class="skill-badge">Artificial Intelligence & ML</span> <span class="skill-badge">Cybersecurity & Digital Forensics</span> <span class="skill-badge">Cryptocurrency and AI</span></div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="px-6 py-16 max-w-5xl mx-auto">
+      <div class="glass-card rounded-3xl p-8 text-center fade-up">
+        <h2 class="text-3xl font-bold">Let's Connect</h2>
+        <p class="text-gray-300 mt-2">Open to Applied AI / ML Engineer, AI Automation Engineer, Junior ML Engineer roles.</p>
+        <div class="flex flex-wrap justify-center gap-5 mt-6">
+          <a href="mailto:nikhilsaroj.ai@gmail.com" class="btn-primary px-6 py-2 rounded-full flex items-center gap-2"><i class="fas fa-envelope"></i> nikhilsaroj.ai@gmail.com</a>
+          <button id="copyEmailBtn" class="border border-cyan-400/50 hover:bg-cyan-500/20 px-6 py-2 rounded-full flex items-center gap-2"><i class="far fa-copy"></i> Copy email</button>
+          <a href="https://github.com/Nikhildsaroj" target="_blank" class="border border-cyan-400/50 hover:bg-cyan-500/20 px-6 py-2 rounded-full flex items-center gap-2"><i class="fab fa-github"></i> GitHub</a>
+          <a href="https://www.linkedin.com/in/nikhil-saroj-a15bb0281" target="_blank" class="border border-cyan-400/50 hover:bg-cyan-500/20 px-6 py-2 rounded-full flex items-center gap-2"><i class="fab fa-linkedin"></i> LinkedIn</a>
+        </div>
+        <div class="mt-6 text-sm text-gray-400"><i class="fas fa-map-marker-alt"></i> Airoli, Navi Mumbai, India · <i class="fas fa-phone-alt"></i> +91 9049813168</div>
+        <div class="mt-6 text-sm text-gray-500">I build production-oriented systems that merge AI, backend, and business logic. Let’s build something impactful.</div>
+      </div>
+      <div class="text-center text-gray-500 text-xs mt-10">© 2025 Nikhil Saroj — Applied AI & Automation. Built with precision.</div>
+    </section>
+  </main>
+
+  <!-- Modal -->
+  <div id="projectModal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // ---------- PROJECTS DATA (12 projects) ----------
+    const projectsData = [
+      { title: "OCR-Based Inventory / Box Counting", stack: "PaddleOCR, OpenCV, Streamlit, Flask, Google Sheets API, Cloudflare Tunnel", summary: "Recognizes 3D printer box labels, fuzzy matching, counting logic, real-time sync to Sheets.", impact: "Reduced warehouse counting errors, automated inventory tracking, cloud tunnel deployment.", problem: "Manual box label reading and counting caused delays & inaccuracies.", solution: "OCR + fuzzy matching + layer calculation, Google Sheets sync via API, exposed securely via Cloudflare Tunnel.", engineering: "End-to-end pipeline: image preprocessing, OCR confidence tuning, fuzzy matching, counting logic, sheets sync, secure reverse proxy." },
+      { title: "AI Sales Forecasting Pipeline", stack: "Python, Pandas, XGBoost, scikit-learn, Playwright", summary: "SKU-level demand forecasting with adaptive lag, weekly predictions, Excel export.", impact: "Improved stock planning, reduced stockouts, business-ready dashboards.", problem: "Unreliable manual forecasts leading to overstock/stockouts.", solution: "XGBoost regression with per-SKU lag selection, feature engineering, automated reporting.", engineering: "Data cleaning, time-series cross-validation, adaptive window, mover segmentation, automated Excel generation." },
+      { title: "Lead Management System (Mass Media App)", stack: "Flask, MySQL, Pandas, Waitress, Webhooks, CSV/Excel", summary: "Complete lead ingestion, filtering, CRM sync via Zoho webhooks, auth, pagination.", impact: "Streamlined 1000+ leads/hour processing, automated CRM pipeline.", problem: "Disconnected lead data, manual CSV handling.", solution: "MVC Flask app with secure login, filtering, webhook integration, export features.", engineering: "Modular architecture, bcrypt hashing, bulk import, RESTful webhooks, deployed with Waitress." },
+      { title: "Advanced Manga/Anime Recommendation Engine", stack: "Sentence Transformers, FAISS, Streamlit, AniList GraphQL API", summary: "Semantic embeddings + vector search + reranking for personalized recommendations.", impact: "High precision recommendations, real-time semantic retrieval.", problem: "Generic recommenders lack semantic understanding.", solution: "Embeddings (BGE/MiniLM) + FAISS index, reranking with genre overlap, external API enrichment.", engineering: "Modular class design, caching, fallback models, API retries, Streamlit interface." },
+      { title: "AI-Powered Language Learning Chatbot", stack: "Flask, Gemini API, LangChain, SQLite, SpeechRecognition, gTTS", summary: "Grammar correction, speech input/output, mistake tracking, progress memory.", impact: "Interactive conversational learning with feedback loops.", problem: "Lack of engaging, speech-enabled language tools.", solution: "LLM orchestration, speech-to-text & TTS, store user mistakes, generate summaries.", engineering: "LangChain agents, SQLite persistence, session memory, real-time grammar evaluation." },
+      { title: "Supply Chain Automation System", stack: "Python, Pandas, Streamlit, FastAPI, Excel Automation", summary: "Demand forecast, safety stock, reorder points, EOL analysis — insights under 20s.", impact: "Reduced manual planning effort by 90%+, data-driven purchase decisions.", problem: "Manual spreadsheets, slow inventory planning.", solution: "Statistical models for safety stock, demand variability, multi-interface (Streamlit/FastAPI).", engineering: "Demand forecasting, lead-time variability, safety stock formula, EOL classification, parallel processing." },
+      { title: "Email & Phone Validation Engine", stack: "Python, Streamlit, DNS, SMTP, Pandas, Regex, Phonenumbers", summary: "Multi-layer email validation (MX, SMTP, catch-all) + Indian phone normalization.", impact: "95–98% validation accuracy, bulk processing, quality scoring.", problem: "High bounce rates and invalid contacts hurting campaigns.", solution: "SMTP probing + domain verification + phone number library with parallel processing.", engineering: "ThreadPoolExecutor, DNS resolution, SMTP handshake simulation, carrier detection, quality scoring." },
+      { title: "AI-Powered SKU Mapping Automation", stack: "Python, Pandas, RapidFuzz, Regex, Excel Automation, LLM Integration", summary: "Maps OEM product data to master SKU using fuzzy + token + LLM review.", impact: "Reduced manual mapping workload by 70–90%, faster onboarding.", problem: "Messy OCR text and inconsistent product descriptions.", solution: "Hybrid matching (RapidFuzz, token similarity, attribute extraction) + LLM validation layer.", engineering: "Data preprocessing, attribute extraction, semantic key generation, MATCH/REVIEW/NO_MATCH classification." },
+      { title: "Gmail Resume Automation System", stack: "Python, IMAP, Google Drive API, Pandas, openpyxl", summary: "Monitors Gmail, extracts resume attachments, uploads to Drive, generates shareable links.", impact: "Automated recruiter workflow, deduplication via hashing, structured metadata export.", problem: "Manual resume collection and organization.", solution: "IMAP polling, attachment parsing, Drive service account upload, Excel logging.", engineering: "UID tracking, hash-based dedup, error handling, secure credential management." },
+      { title: "Google CSE Lead Engine", stack: "Streamlit, Google Custom Search API, regex extraction, CSV/JSON", summary: "Aggressive search query rotation, contact extraction, API key management.", impact: "1000+ leads/hour extraction, duplicate suppression, raw logging.", problem: "API quotas and unreliable contact extraction.", solution: "Key rotation, search strategy variants (standard/aggressive/domain), regex extraction.", engineering: "Thread-safe key exhaustion, pagination handling, UI for settings, JSON fallback." },
+      { title: "PDF to Excel Extraction Tool", stack: "Python, OCR/parsing logic, Pandas", summary: "Converts unstructured/semi-structured PDF data into business-ready Excel.", impact: "Bridges document silos with analytics teams, reduces data entry.", problem: "Manual copy-paste from invoices/reports.", solution: "Table detection + text extraction + structured mapping to Excel.", engineering: "Layout analysis, regex-based column mapping, error logging." },
+      { title: "Canteen Monitoring System (YOLO+DeepSORT)", stack: "YOLO, DeepSORT, OpenCV, Colab", summary: "People detection and tracking for occupancy analytics.", impact: "Real-time crowd estimation, trajectory visualization.", problem: "Need for occupancy insights without manual counting.", solution: "Object detection + tracking with identity preservation.", engineering: "Detection + tracking pipeline, configurable thresholds, annotated video output." }
+    ];
+
+    const container = document.getElementById('projectsContainer');
+    const modalEl = document.getElementById('projectModal');
+    const modalBody = document.getElementById('modalBody');
+    const closeModalBtn = document.querySelector('.close-modal');
+    const resumeBtnNav = document.getElementById('resumeBtnNav');
+    const resumeBtnMobile = document.getElementById('resumeBtnMobile');
+    const copyEmailBtn = document.getElementById('copyEmailBtn');
+
+    function escapeHtml(str) {
+      return String(str).replace(/[&<>"]/g, function (m) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[m];
+      });
+    }
+
+    function openModal(project) {
+      modalBody.innerHTML = `
+        <h2 class="text-2xl font-bold">${escapeHtml(project.title)}</h2>
+        <div class="mt-3"><strong class="text-cyan-300">🧩 Problem:</strong> ${escapeHtml(project.problem)}</div>
+        <div class="mt-2"><strong class="text-cyan-300">⚙️ Solution:</strong> ${escapeHtml(project.solution)}</div>
+        <div class="mt-2"><strong class="text-cyan-300">📦 Stack:</strong> ${escapeHtml(project.stack)}</div>
+        <div class="mt-2"><strong class="text-cyan-300">📈 Impact & Results:</strong> ${escapeHtml(project.impact)}</div>
+        <div class="mt-2"><strong class="text-cyan-300">🛠️ Engineering depth:</strong> ${escapeHtml(project.engineering)}</div>
+        <div class="mt-4"><a href="https://github.com/Nikhildsaroj" target="_blank" class="btn-primary inline-block px-4 py-2 rounded-full text-sm">View on GitHub <i class="fab fa-github"></i></a></div>
+      `;
+      modalEl.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      modalEl.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+
+    function generateProjectCards() {
+      if (!container) return;
+      container.innerHTML = '';
+      projectsData.forEach((p, idx) => {
+        const card = document.createElement('div');
+        card.className = 'glass-card rounded-2xl p-5 fade-up';
+        card.innerHTML = `
+          <div class="flex justify-between items-start gap-3">
+            <i class="fas fa-cube text-3xl text-cyan-300"></i>
+            <span class="text-xs bg-blue-500/20 px-2 py-1 rounded-full border border-blue-400/20">Prod-ready</span>
+          </div>
+          <h3 class="text-xl font-bold mt-3">${escapeHtml(p.title)}</h3>
+          <p class="text-gray-300 text-sm mt-2 leading-relaxed">${escapeHtml(p.summary)}</p>
+          <div class="flex flex-wrap gap-2 mt-4">
+            ${p.stack.split(',').slice(0,4).map(t => `<span class="text-xs bg-white/10 px-2 py-1 rounded-full border border-white/10">${escapeHtml(t.trim())}</span>`).join('')}
+          </div>
+          <div class="mt-4 text-xs text-cyan-200 leading-relaxed"><i class="fas fa-chart-simple mr-1"></i> ${escapeHtml(p.impact)}</div>
+          <button type="button" class="view-details mt-4 text-sm border border-cyan-400/40 px-3 py-2 rounded-full hover:bg-cyan-500/20 transition" data-idx="${idx}"><i class="fas fa-info-circle"></i> Case study</button>
+        `;
+        container.appendChild(card);
+      });
+      document.querySelectorAll('.view-details').forEach(btn => {
+        btn.addEventListener('click', function () {
+          const idx = Number(this.getAttribute('data-idx'));
+          openModal(projectsData[idx]);
+        });
+      });
+    }
+
+    function initFadeObserver() {
+      const fadeElements = document.querySelectorAll('.fade-up');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      fadeElements.forEach(el => observer.observe(el));
+      requestAnimationFrame(() => {
+        fadeElements.forEach(el => {
+          if (el.getBoundingClientRect().top < window.innerHeight - 80) el.classList.add('visible');
+        });
+      });
+    }
+
+    generateProjectCards();
+    initFadeObserver();
+
+    if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
+    window.addEventListener('click', (e) => { if (e.target === modalEl) closeModal(); });
+    window.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+    function handleResume(e) { e.preventDefault(); alert("📄 Download my latest resume: nikhilsaroj.ai@gmail.com | Available upon request."); }
+    if (resumeBtnNav) resumeBtnNav.addEventListener('click', handleResume);
+    if (resumeBtnMobile) resumeBtnMobile.addEventListener('click', handleResume);
+    if (copyEmailBtn) copyEmailBtn.addEventListener('click', async () => {
+      try { await navigator.clipboard.writeText("nikhilsaroj.ai@gmail.com"); alert("Email copied to clipboard"); }
+      catch { alert("Could not copy email. Please copy manually: nikhilsaroj.ai@gmail.com"); }
+    });
+
+    // Mobile menu toggle
+    const mobileToggle = document.getElementById('mobileMenuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (mobileToggle && mobileMenu) {
+      mobileToggle.addEventListener('click', () => {
+        const isVisible = mobileMenu.style.display === 'flex';
+        mobileMenu.style.display = isVisible ? 'none' : 'flex';
+      });
+      // Close mobile menu when clicking a link
+      mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => { mobileMenu.style.display = 'none'; });
+      });
+    }
+  });
+  </script>
+</body>
+</html>
