@@ -136,6 +136,24 @@
       transform: translateY(-2px);
       box-shadow: 0 5px 12px rgba(0,200,255,0.2);
     }
+
+    /* Mobile-specific styles for About section */
+    @media (max-width: 640px) {
+      .about-mobile-stack {
+        flex-direction: column !important;
+        gap: 1.5rem !important;
+      }
+      .about-mobile-stack .flex-1 {
+        width: 100% !important;
+      }
+      .about-mobile-stack .grid {
+        grid-template-columns: 1fr !important;
+        gap: 0.75rem !important;
+      }
+      .philosophy-list {
+        margin-top: 0.5rem !important;
+      }
+    }
   </style>
 </head>
 <body class="text-gray-200">
@@ -143,9 +161,6 @@
   <!-- Sticky Navigation with mobile toggle -->
   <nav class="fixed top-0 w-full z-50 bg-black/40 backdrop-blur-xl border-b border-white/10 shadow-lg">
     <div class="max-w-7xl mx-auto px-6 py-3 flex flex-wrap justify-between items-center">
-      <!-- Logo / Brand -->
- 
-      
       <!-- Desktop Navigation -->
       <div class="desktop-nav gap-5 text-sm font-medium text-gray-300 items-center">
         <a href="#home" class="hover:text-cyan-300 transition">Home</a>
@@ -153,7 +168,7 @@
         <a href="#skills" class="hover:text-cyan-300 transition">Skills</a>
         <a href="#projects" class="hover:text-cyan-300 transition">Projects</a>
         <a href="#contact" class="hover:text-cyan-300 transition">Contact</a>
-        
+
         <a href="https://github.com/Nikhildsaroj" target="_blank" class="hover:text-cyan-300"><i class="fab fa-github"></i></a>
         <a href="https://www.linkedin.com/in/nikhil-saroj-a15bb0281" target="_blank" class="hover:text-cyan-300"><i class="fab fa-linkedin"></i></a>
       </div>
@@ -220,27 +235,45 @@
       </div>
     </section>
 
-    <!-- About & education -->
-    <section class="px-6 py-16 max-w-6xl mx-auto">
-      <div class="glass-card rounded-3xl p-8 fade-up">
-        <div class="flex flex-wrap gap-8 items-start">
-          <div class="flex-1">
-            <h2 class="text-3xl font-bold flex items-center gap-2"><i class="fas fa-user-astronaut text-cyan-400"></i> About me</h2>
-            <p class="mt-4 text-gray-300 leading-relaxed">I'm an <strong class="text-cyan-300">Applied AI & ML Engineer</strong> focused on bridging machine learning with business workflows — OCR, NLP, computer vision, automation pipelines, and backend systems. Currently building production tools that reduce manual effort, improve data quality, and deliver real operational value.</p>
-            <p class="mt-3 text-gray-300">From end-to-end lead management platforms, email-to-Excel automation, sales forecasting with XGBoost, to OCR-based inventory counting — I design scalable solutions that move beyond notebooks. I target roles where AI meets engineering: Applied ML, AI Automation, or Backend + AI systems.</p>
-            <div class="mt-5 grid sm:grid-cols-2 gap-4">
-              <div><i class="fas fa-graduation-cap text-cyan-300"></i> <span class="font-semibold">B.Sc CS (Data Science)</span><br>Pillai College, CGPA 8.8/10</div>
-              <div><i class="fas fa-certificate text-cyan-300"></i> <span class="font-semibold">Certifications:</span> AI/ML, Cybersecurity, Cryptocurrency & AI</div>
+    <!-- About & education - FIXED MOBILE VERSION -->
+    <section class="px-4 sm:px-6 py-12 sm:py-16 max-w-6xl mx-auto">
+      <div class="glass-card rounded-3xl p-5 sm:p-8 fade-up">
+        <!-- Stack vertically on mobile, row on desktop -->
+        <div class="flex flex-col lg:flex-row gap-6 lg:gap-8 items-start about-mobile-stack">
+          
+          <!-- Left column - About me text -->
+          <div class="flex-1 w-full">
+            <h2 class="text-2xl sm:text-3xl font-bold flex items-center gap-2"><i class="fas fa-user-astronaut text-cyan-400"></i> About me</h2>
+            <p class="mt-3 sm:mt-4 text-gray-300 leading-relaxed text-sm sm:text-base">I'm an <strong class="text-cyan-300">Applied AI & ML Engineer</strong> focused on bridging machine learning with business workflows — OCR, NLP, computer vision, automation pipelines, and backend systems. Currently building production tools that reduce manual effort, improve data quality, and deliver real operational value.</p>
+            <p class="mt-2 sm:mt-3 text-gray-300 leading-relaxed text-sm sm:text-base">From end-to-end lead management platforms, email-to-Excel automation, sales forecasting with XGBoost, to OCR-based inventory counting — I design scalable solutions that move beyond notebooks. I target roles where AI meets engineering: Applied ML, AI Automation, or Backend + AI systems.</p>
+            
+            <!-- Education & Certifications - Stack on mobile, grid on tablet+ -->
+            <div class="mt-4 sm:mt-5 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+              <div class="bg-white/5 rounded-xl p-3 sm:p-4">
+                <i class="fas fa-graduation-cap text-cyan-300 text-lg sm:text-xl"></i>
+                <div class="font-semibold text-sm sm:text-base mt-1">B.Sc CS (Data Science)</div>
+                <div class="text-xs sm:text-sm text-gray-400">Pillai College, CGPA 8.8/10</div>
+              </div>
+              <div class="bg-white/5 rounded-xl p-3 sm:p-4">
+                <i class="fas fa-certificate text-cyan-300 text-lg sm:text-xl"></i>
+                <div class="font-semibold text-sm sm:text-base mt-1">Certifications</div>
+                <div class="text-xs sm:text-sm text-gray-400">AI/ML, Cybersecurity, Crypto & AI</div>
+              </div>
             </div>
           </div>
-          <div class="flex-1">
-            <h3 class="text-xl font-semibold">Core Philosophy</h3>
-            <ul class="mt-3 space-y-2 text-gray-300">
-              <li><i class="fas fa-check-circle text-cyan-400 w-5"></i> AI is not just notebooks — it's integration</li>
-              <li><i class="fas fa-check-circle text-cyan-400 w-5"></i> Automation reduces human error & unlocks scale</li>
-              <li><i class="fas fa-check-circle text-cyan-400 w-5"></i> End-to-end ownership: scraping → model → dashboard → deployment</li>
-            </ul>
+          
+          <!-- Right column - Core Philosophy -->
+          <div class="flex-1 w-full">
+            <div class="bg-cyan-500/5 rounded-xl p-4 sm:p-5 border border-cyan-500/20">
+              <h3 class="text-lg sm:text-xl font-semibold flex items-center gap-2"><i class="fas fa-lightbulb text-cyan-400"></i> Core Philosophy</h3>
+              <ul class="mt-3 space-y-2 sm:space-y-3 philosophy-list">
+                <li class="flex items-start gap-2 text-sm sm:text-base"><i class="fas fa-check-circle text-cyan-400 mt-0.5"></i> <span>AI is not just notebooks — it's integration</span></li>
+                <li class="flex items-start gap-2 text-sm sm:text-base"><i class="fas fa-check-circle text-cyan-400 mt-0.5"></i> <span>Automation reduces human error & unlocks scale</span></li>
+                <li class="flex items-start gap-2 text-sm sm:text-base"><i class="fas fa-check-circle text-cyan-400 mt-0.5"></i> <span>End-to-end ownership: scraping → model → dashboard → deployment</span></li>
+              </ul>
+            </div>
           </div>
+          
         </div>
       </div>
     </section>
@@ -281,7 +314,7 @@
       </div>
     </section>
 
-    <!-- Featured Projects with LIVE DEMO added for Manga Recommender -->
+    <!-- Featured Projects -->
     <section id="projects" class="px-6 py-16 max-w-7xl mx-auto">
       <div class="text-center mb-12 fade-up"><h2 class="text-4xl font-bold">⚡ Flagship Engineering Projects</h2><p class="text-gray-400 mt-2">Production-grade AI & automation systems delivering real business value</p></div>
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-7" id="projectsContainer"></div>
@@ -323,7 +356,7 @@
           <a href="https://www.linkedin.com/in/nikhil-saroj-a15bb0281" target="_blank" class="border border-cyan-400/50 hover:bg-cyan-500/20 px-6 py-2 rounded-full flex items-center gap-2"><i class="fab fa-linkedin"></i> LinkedIn</a>
         </div>
         <div class="mt-6 text-sm text-gray-400"><i class="fas fa-map-marker-alt"></i> Airoli, Navi Mumbai, India · <i class="fas fa-phone-alt"></i> +91 9049813168</div>
-        <div class="mt-6 text-sm text-gray-500">I build production-oriented systems that merge AI, backend, and business logic. Let’s build something impactful.</div>
+        <div class="mt-6 text-sm text-gray-500">I build production-oriented systems that merge AI, backend, and business logic. Let's build something impactful.</div>
       </div>
       <div class="text-center text-gray-500 text-xs mt-10">© 2025 Nikhil Saroj — Applied AI & Automation. Built with precision.</div>
     </section>
@@ -339,7 +372,6 @@
 
   <script>
   document.addEventListener('DOMContentLoaded', function () {
-    // ---------- PROJECTS DATA (with live demo link for Manga Recommender) ----------
     const projectsData = [
       { title: "✨ LIVE: Manga/Anime Recommendation Engine", stack: "Sentence Transformers, FAISS, Streamlit, AniList GraphQL API, Vector Search", summary: "Semantic embeddings + vector search + reranking for personalized anime recommendations. Interactive live app deployed on Streamlit Cloud.", impact: "Production deployment with real-time recommendation, high precision semantic retrieval, and beautiful UI — accessible worldwide.", problem: "Traditional recommenders lack semantic depth and personalization.", solution: "Built a semantic retrieval system using BGE/MiniLM embeddings, FAISS index, and enriched metadata via AniList API. Includes reranking and genre filters.", engineering: "Modular Python backend, FAISS vector DB, async API calls, caching, fallback models. Fully containerized logic, responsive Streamlit frontend.", liveUrl: "https://am4fw6v2pukpucyxgm9wwv.streamlit.app/" },
       { title: "OCR-Based Inventory / Box Counting", stack: "PaddleOCR, OpenCV, Streamlit, Flask, Google Sheets API, Cloudflare Tunnel", summary: "Recognizes 3D printer box labels, fuzzy matching, counting logic, real-time sync to Sheets.", impact: "Reduced warehouse counting errors, automated inventory tracking, cloud tunnel deployment.", problem: "Manual box label reading and counting caused delays & inaccuracies.", solution: "OCR + fuzzy matching + layer calculation, Google Sheets sync via API, exposed securely via Cloudflare Tunnel.", engineering: "End-to-end pipeline: image preprocessing, OCR confidence tuning, fuzzy matching, counting logic, sheets sync, secure reverse proxy.", liveUrl: null },
