@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -125,6 +126,16 @@
       .desktop-nav { display: flex; }
       .mobile-menu { display: none !important; }
     }
+    .live-demo-btn {
+      background: rgba(0, 200, 255, 0.15);
+      border: 1px solid #0ff8;
+      transition: all 0.2s ease;
+    }
+    .live-demo-btn:hover {
+      background: rgba(0, 200, 255, 0.35);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 12px rgba(0,200,255,0.2);
+    }
   </style>
 </head>
 <body class="text-gray-200">
@@ -142,7 +153,7 @@
         <a href="#skills" class="hover:text-cyan-300 transition">Skills</a>
         <a href="#projects" class="hover:text-cyan-300 transition">Projects</a>
         <a href="#contact" class="hover:text-cyan-300 transition">Contact</a>
-        <a href="#" id="resumeBtnNav" class="px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 text-sm transition"><i class="fas fa-download"></i> Resume</a>
+        
         <a href="https://github.com/Nikhildsaroj" target="_blank" class="hover:text-cyan-300"><i class="fab fa-github"></i></a>
         <a href="https://www.linkedin.com/in/nikhil-saroj-a15bb0281" target="_blank" class="hover:text-cyan-300"><i class="fab fa-linkedin"></i></a>
       </div>
@@ -270,7 +281,7 @@
       </div>
     </section>
 
-    <!-- Featured Projects -->
+    <!-- Featured Projects with LIVE DEMO added for Manga Recommender -->
     <section id="projects" class="px-6 py-16 max-w-7xl mx-auto">
       <div class="text-center mb-12 fade-up"><h2 class="text-4xl font-bold">⚡ Flagship Engineering Projects</h2><p class="text-gray-400 mt-2">Production-grade AI & automation systems delivering real business value</p></div>
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-7" id="projectsContainer"></div>
@@ -328,20 +339,20 @@
 
   <script>
   document.addEventListener('DOMContentLoaded', function () {
-    // ---------- PROJECTS DATA (12 projects) ----------
+    // ---------- PROJECTS DATA (with live demo link for Manga Recommender) ----------
     const projectsData = [
-      { title: "OCR-Based Inventory / Box Counting", stack: "PaddleOCR, OpenCV, Streamlit, Flask, Google Sheets API, Cloudflare Tunnel", summary: "Recognizes 3D printer box labels, fuzzy matching, counting logic, real-time sync to Sheets.", impact: "Reduced warehouse counting errors, automated inventory tracking, cloud tunnel deployment.", problem: "Manual box label reading and counting caused delays & inaccuracies.", solution: "OCR + fuzzy matching + layer calculation, Google Sheets sync via API, exposed securely via Cloudflare Tunnel.", engineering: "End-to-end pipeline: image preprocessing, OCR confidence tuning, fuzzy matching, counting logic, sheets sync, secure reverse proxy." },
-      { title: "AI Sales Forecasting Pipeline", stack: "Python, Pandas, XGBoost, scikit-learn, Playwright", summary: "SKU-level demand forecasting with adaptive lag, weekly predictions, Excel export.", impact: "Improved stock planning, reduced stockouts, business-ready dashboards.", problem: "Unreliable manual forecasts leading to overstock/stockouts.", solution: "XGBoost regression with per-SKU lag selection, feature engineering, automated reporting.", engineering: "Data cleaning, time-series cross-validation, adaptive window, mover segmentation, automated Excel generation." },
-      { title: "Lead Management System (Mass Media App)", stack: "Flask, MySQL, Pandas, Waitress, Webhooks, CSV/Excel", summary: "Complete lead ingestion, filtering, CRM sync via Zoho webhooks, auth, pagination.", impact: "Streamlined 1000+ leads/hour processing, automated CRM pipeline.", problem: "Disconnected lead data, manual CSV handling.", solution: "MVC Flask app with secure login, filtering, webhook integration, export features.", engineering: "Modular architecture, bcrypt hashing, bulk import, RESTful webhooks, deployed with Waitress." },
-      { title: "Advanced Manga/Anime Recommendation Engine", stack: "Sentence Transformers, FAISS, Streamlit, AniList GraphQL API", summary: "Semantic embeddings + vector search + reranking for personalized recommendations.", impact: "High precision recommendations, real-time semantic retrieval.", problem: "Generic recommenders lack semantic understanding.", solution: "Embeddings (BGE/MiniLM) + FAISS index, reranking with genre overlap, external API enrichment.", engineering: "Modular class design, caching, fallback models, API retries, Streamlit interface." },
-      { title: "AI-Powered Language Learning Chatbot", stack: "Flask, Gemini API, LangChain, SQLite, SpeechRecognition, gTTS", summary: "Grammar correction, speech input/output, mistake tracking, progress memory.", impact: "Interactive conversational learning with feedback loops.", problem: "Lack of engaging, speech-enabled language tools.", solution: "LLM orchestration, speech-to-text & TTS, store user mistakes, generate summaries.", engineering: "LangChain agents, SQLite persistence, session memory, real-time grammar evaluation." },
-      { title: "Supply Chain Automation System", stack: "Python, Pandas, Streamlit, FastAPI, Excel Automation", summary: "Demand forecast, safety stock, reorder points, EOL analysis — insights under 20s.", impact: "Reduced manual planning effort by 90%+, data-driven purchase decisions.", problem: "Manual spreadsheets, slow inventory planning.", solution: "Statistical models for safety stock, demand variability, multi-interface (Streamlit/FastAPI).", engineering: "Demand forecasting, lead-time variability, safety stock formula, EOL classification, parallel processing." },
-      { title: "Email & Phone Validation Engine", stack: "Python, Streamlit, DNS, SMTP, Pandas, Regex, Phonenumbers", summary: "Multi-layer email validation (MX, SMTP, catch-all) + Indian phone normalization.", impact: "95–98% validation accuracy, bulk processing, quality scoring.", problem: "High bounce rates and invalid contacts hurting campaigns.", solution: "SMTP probing + domain verification + phone number library with parallel processing.", engineering: "ThreadPoolExecutor, DNS resolution, SMTP handshake simulation, carrier detection, quality scoring." },
-      { title: "AI-Powered SKU Mapping Automation", stack: "Python, Pandas, RapidFuzz, Regex, Excel Automation, LLM Integration", summary: "Maps OEM product data to master SKU using fuzzy + token + LLM review.", impact: "Reduced manual mapping workload by 70–90%, faster onboarding.", problem: "Messy OCR text and inconsistent product descriptions.", solution: "Hybrid matching (RapidFuzz, token similarity, attribute extraction) + LLM validation layer.", engineering: "Data preprocessing, attribute extraction, semantic key generation, MATCH/REVIEW/NO_MATCH classification." },
-      { title: "Gmail Resume Automation System", stack: "Python, IMAP, Google Drive API, Pandas, openpyxl", summary: "Monitors Gmail, extracts resume attachments, uploads to Drive, generates shareable links.", impact: "Automated recruiter workflow, deduplication via hashing, structured metadata export.", problem: "Manual resume collection and organization.", solution: "IMAP polling, attachment parsing, Drive service account upload, Excel logging.", engineering: "UID tracking, hash-based dedup, error handling, secure credential management." },
-      { title: "Google CSE Lead Engine", stack: "Streamlit, Google Custom Search API, regex extraction, CSV/JSON", summary: "Aggressive search query rotation, contact extraction, API key management.", impact: "1000+ leads/hour extraction, duplicate suppression, raw logging.", problem: "API quotas and unreliable contact extraction.", solution: "Key rotation, search strategy variants (standard/aggressive/domain), regex extraction.", engineering: "Thread-safe key exhaustion, pagination handling, UI for settings, JSON fallback." },
-      { title: "PDF to Excel Extraction Tool", stack: "Python, OCR/parsing logic, Pandas", summary: "Converts unstructured/semi-structured PDF data into business-ready Excel.", impact: "Bridges document silos with analytics teams, reduces data entry.", problem: "Manual copy-paste from invoices/reports.", solution: "Table detection + text extraction + structured mapping to Excel.", engineering: "Layout analysis, regex-based column mapping, error logging." },
-      { title: "Canteen Monitoring System (YOLO+DeepSORT)", stack: "YOLO, DeepSORT, OpenCV, Colab", summary: "People detection and tracking for occupancy analytics.", impact: "Real-time crowd estimation, trajectory visualization.", problem: "Need for occupancy insights without manual counting.", solution: "Object detection + tracking with identity preservation.", engineering: "Detection + tracking pipeline, configurable thresholds, annotated video output." }
+      { title: "✨ LIVE: Manga/Anime Recommendation Engine", stack: "Sentence Transformers, FAISS, Streamlit, AniList GraphQL API, Vector Search", summary: "Semantic embeddings + vector search + reranking for personalized anime recommendations. Interactive live app deployed on Streamlit Cloud.", impact: "Production deployment with real-time recommendation, high precision semantic retrieval, and beautiful UI — accessible worldwide.", problem: "Traditional recommenders lack semantic depth and personalization.", solution: "Built a semantic retrieval system using BGE/MiniLM embeddings, FAISS index, and enriched metadata via AniList API. Includes reranking and genre filters.", engineering: "Modular Python backend, FAISS vector DB, async API calls, caching, fallback models. Fully containerized logic, responsive Streamlit frontend.", liveUrl: "https://am4fw6v2pukpucyxgm9wwv.streamlit.app/" },
+      { title: "OCR-Based Inventory / Box Counting", stack: "PaddleOCR, OpenCV, Streamlit, Flask, Google Sheets API, Cloudflare Tunnel", summary: "Recognizes 3D printer box labels, fuzzy matching, counting logic, real-time sync to Sheets.", impact: "Reduced warehouse counting errors, automated inventory tracking, cloud tunnel deployment.", problem: "Manual box label reading and counting caused delays & inaccuracies.", solution: "OCR + fuzzy matching + layer calculation, Google Sheets sync via API, exposed securely via Cloudflare Tunnel.", engineering: "End-to-end pipeline: image preprocessing, OCR confidence tuning, fuzzy matching, counting logic, sheets sync, secure reverse proxy.", liveUrl: null },
+      { title: "AI Sales Forecasting Pipeline", stack: "Python, Pandas, XGBoost, scikit-learn, Playwright", summary: "SKU-level demand forecasting with adaptive lag, weekly predictions, Excel export.", impact: "Improved stock planning, reduced stockouts, business-ready dashboards.", problem: "Unreliable manual forecasts leading to overstock/stockouts.", solution: "XGBoost regression with per-SKU lag selection, feature engineering, automated reporting.", engineering: "Data cleaning, time-series cross-validation, adaptive window, mover segmentation, automated Excel generation.", liveUrl: null },
+      { title: "Lead Management System (Mass Media App)", stack: "Flask, MySQL, Pandas, Waitress, Webhooks, CSV/Excel", summary: "Complete lead ingestion, filtering, CRM sync via Zoho webhooks, auth, pagination.", impact: "Streamlined 1000+ leads/hour processing, automated CRM pipeline.", problem: "Disconnected lead data, manual CSV handling.", solution: "MVC Flask app with secure login, filtering, webhook integration, export features.", engineering: "Modular architecture, bcrypt hashing, bulk import, RESTful webhooks, deployed with Waitress.", liveUrl: null },
+      { title: "AI-Powered Language Learning Chatbot", stack: "Flask, Gemini API, LangChain, SQLite, SpeechRecognition, gTTS", summary: "Grammar correction, speech input/output, mistake tracking, progress memory.", impact: "Interactive conversational learning with feedback loops.", problem: "Lack of engaging, speech-enabled language tools.", solution: "LLM orchestration, speech-to-text & TTS, store user mistakes, generate summaries.", engineering: "LangChain agents, SQLite persistence, session memory, real-time grammar evaluation.", liveUrl: null },
+      { title: "Supply Chain Automation System", stack: "Python, Pandas, Streamlit, FastAPI, Excel Automation", summary: "Demand forecast, safety stock, reorder points, EOL analysis — insights under 20s.", impact: "Reduced manual planning effort by 90%+, data-driven purchase decisions.", problem: "Manual spreadsheets, slow inventory planning.", solution: "Statistical models for safety stock, demand variability, multi-interface (Streamlit/FastAPI).", engineering: "Demand forecasting, lead-time variability, safety stock formula, EOL classification, parallel processing.", liveUrl: null },
+      { title: "Email & Phone Validation Engine", stack: "Python, Streamlit, DNS, SMTP, Pandas, Regex, Phonenumbers", summary: "Multi-layer email validation (MX, SMTP, catch-all) + Indian phone normalization.", impact: "95–98% validation accuracy, bulk processing, quality scoring.", problem: "High bounce rates and invalid contacts hurting campaigns.", solution: "SMTP probing + domain verification + phone number library with parallel processing.", engineering: "ThreadPoolExecutor, DNS resolution, SMTP handshake simulation, carrier detection, quality scoring.", liveUrl: null },
+      { title: "AI-Powered SKU Mapping Automation", stack: "Python, Pandas, RapidFuzz, Regex, Excel Automation, LLM Integration", summary: "Maps OEM product data to master SKU using fuzzy + token + LLM review.", impact: "Reduced manual mapping workload by 70–90%, faster onboarding.", problem: "Messy OCR text and inconsistent product descriptions.", solution: "Hybrid matching (RapidFuzz, token similarity, attribute extraction) + LLM validation layer.", engineering: "Data preprocessing, attribute extraction, semantic key generation, MATCH/REVIEW/NO_MATCH classification.", liveUrl: null },
+      { title: "Gmail Resume Automation System", stack: "Python, IMAP, Google Drive API, Pandas, openpyxl", summary: "Monitors Gmail, extracts resume attachments, uploads to Drive, generates shareable links.", impact: "Automated recruiter workflow, deduplication via hashing, structured metadata export.", problem: "Manual resume collection and organization.", solution: "IMAP polling, attachment parsing, Drive service account upload, Excel logging.", engineering: "UID tracking, hash-based dedup, error handling, secure credential management.", liveUrl: null },
+      { title: "Google CSE Lead Engine", stack: "Streamlit, Google Custom Search API, regex extraction, CSV/JSON", summary: "Aggressive search query rotation, contact extraction, API key management.", impact: "1000+ leads/hour extraction, duplicate suppression, raw logging.", problem: "API quotas and unreliable contact extraction.", solution: "Key rotation, search strategy variants (standard/aggressive/domain), regex extraction.", engineering: "Thread-safe key exhaustion, pagination handling, UI for settings, JSON fallback.", liveUrl: null },
+      { title: "PDF to Excel Extraction Tool", stack: "Python, OCR/parsing logic, Pandas", summary: "Converts unstructured/semi-structured PDF data into business-ready Excel.", impact: "Bridges document silos with analytics teams, reduces data entry.", problem: "Manual copy-paste from invoices/reports.", solution: "Table detection + text extraction + structured mapping to Excel.", engineering: "Layout analysis, regex-based column mapping, error logging.", liveUrl: null },
+      { title: "Canteen Monitoring System (YOLO+DeepSORT)", stack: "YOLO, DeepSORT, OpenCV, Colab", summary: "People detection and tracking for occupancy analytics.", impact: "Real-time crowd estimation, trajectory visualization.", problem: "Need for occupancy insights without manual counting.", solution: "Object detection + tracking with identity preservation.", engineering: "Detection + tracking pipeline, configurable thresholds, annotated video output.", liveUrl: null }
     ];
 
     const container = document.getElementById('projectsContainer');
@@ -359,6 +370,7 @@
     }
 
     function openModal(project) {
+      const liveSection = project.liveUrl ? `<div class="mt-4"><a href="${project.liveUrl}" target="_blank" class="btn-primary inline-block px-5 py-2 rounded-full text-sm mr-3"><i class="fas fa-external-link-alt"></i> 🌐 Launch Live Demo</a></div>` : '';
       modalBody.innerHTML = `
         <h2 class="text-2xl font-bold">${escapeHtml(project.title)}</h2>
         <div class="mt-3"><strong class="text-cyan-300">🧩 Problem:</strong> ${escapeHtml(project.problem)}</div>
@@ -366,6 +378,7 @@
         <div class="mt-2"><strong class="text-cyan-300">📦 Stack:</strong> ${escapeHtml(project.stack)}</div>
         <div class="mt-2"><strong class="text-cyan-300">📈 Impact & Results:</strong> ${escapeHtml(project.impact)}</div>
         <div class="mt-2"><strong class="text-cyan-300">🛠️ Engineering depth:</strong> ${escapeHtml(project.engineering)}</div>
+        ${liveSection}
         <div class="mt-4"><a href="https://github.com/Nikhildsaroj" target="_blank" class="btn-primary inline-block px-4 py-2 rounded-full text-sm">View on GitHub <i class="fab fa-github"></i></a></div>
       `;
       modalEl.style.display = 'flex';
@@ -381,12 +394,13 @@
       if (!container) return;
       container.innerHTML = '';
       projectsData.forEach((p, idx) => {
+        const isLive = !!p.liveUrl;
         const card = document.createElement('div');
         card.className = 'glass-card rounded-2xl p-5 fade-up';
         card.innerHTML = `
           <div class="flex justify-between items-start gap-3">
             <i class="fas fa-cube text-3xl text-cyan-300"></i>
-            <span class="text-xs bg-blue-500/20 px-2 py-1 rounded-full border border-blue-400/20">Prod-ready</span>
+            ${isLive ? '<span class="text-xs bg-green-500/30 px-2 py-1 rounded-full border border-green-400/50 animate-pulse"><i class="fas fa-play-circle mr-1"></i>LIVE DEMO</span>' : '<span class="text-xs bg-blue-500/20 px-2 py-1 rounded-full border border-blue-400/20">Prod-ready</span>'}
           </div>
           <h3 class="text-xl font-bold mt-3">${escapeHtml(p.title)}</h3>
           <p class="text-gray-300 text-sm mt-2 leading-relaxed">${escapeHtml(p.summary)}</p>
@@ -394,7 +408,10 @@
             ${p.stack.split(',').slice(0,4).map(t => `<span class="text-xs bg-white/10 px-2 py-1 rounded-full border border-white/10">${escapeHtml(t.trim())}</span>`).join('')}
           </div>
           <div class="mt-4 text-xs text-cyan-200 leading-relaxed"><i class="fas fa-chart-simple mr-1"></i> ${escapeHtml(p.impact)}</div>
-          <button type="button" class="view-details mt-4 text-sm border border-cyan-400/40 px-3 py-2 rounded-full hover:bg-cyan-500/20 transition" data-idx="${idx}"><i class="fas fa-info-circle"></i> Case study</button>
+          <div class="flex gap-3 mt-4">
+            <button type="button" class="view-details text-sm border border-cyan-400/40 px-3 py-2 rounded-full hover:bg-cyan-500/20 transition" data-idx="${idx}"><i class="fas fa-info-circle"></i> Case study</button>
+            ${isLive ? `<a href="${p.liveUrl}" target="_blank" class="live-demo-btn text-sm border border-cyan-400 px-3 py-2 rounded-full flex items-center gap-1"><i class="fas fa-external-link-alt"></i> Try Live</a>` : ''}
+          </div>
         `;
         container.appendChild(card);
       });
@@ -439,7 +456,6 @@
       catch { alert("Could not copy email. Please copy manually: nikhilsaroj.ai@gmail.com"); }
     });
 
-    // Mobile menu toggle
     const mobileToggle = document.getElementById('mobileMenuToggle');
     const mobileMenu = document.getElementById('mobileMenu');
     if (mobileToggle && mobileMenu) {
@@ -447,7 +463,6 @@
         const isVisible = mobileMenu.style.display === 'flex';
         mobileMenu.style.display = isVisible ? 'none' : 'flex';
       });
-      // Close mobile menu when clicking a link
       mobileMenu.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => { mobileMenu.style.display = 'none'; });
       });
